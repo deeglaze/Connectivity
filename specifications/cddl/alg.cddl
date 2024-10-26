@@ -1,0 +1,2 @@
+; IANA Named-info
+alg = int / tstr

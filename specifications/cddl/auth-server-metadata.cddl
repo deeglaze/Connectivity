@@ -1,0 +1,13 @@
+auth-server-metadata = {
+  auth-server-metadata-oauth2-normative,
+  "registration_endpoint" => url,
+  "scopes_supported" => [ tstr ],
+  "grant_types_supported" => [ tstr ],
+  "service_documentation" => url,
+  "op_policy_uri" => url,
+  "op_tos_uri" => url,
+  "revocation_endpoint" => url,
+  "introspection_endpoint" => url,
+  "code_challenge_methods_supported" => [ pkce_code_challenge_method ],
+  auth-cds-extensions
+}

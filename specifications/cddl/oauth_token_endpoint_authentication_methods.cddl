@@ -1,0 +1,8 @@
+; https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#token-endpoint-auth-method
+oauth_token_endpoint_authentication_methods /= "none"
+oauth_token_endpoint_authentication_methods /= "client_secret_post"
+oauth_token_endpoint_authentication_methods /= "client_secret_basic"
+oauth_token_endpoint_authentication_methods /= "client_secret_jwt"
+oauth_token_endpoint_authentication_methods /= "private_key_jwt"
+oauth_token_endpoint_authentication_methods /= "tls_client_auth"
+oauth_token_endpoint_authentication_methods /= "self_signed_tls_client_auth"

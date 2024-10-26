@@ -1,0 +1,11 @@
+auth-details-field = {
+  "id" => tstr,
+  "name" => tstr,
+  "description" => tstr
+  "documentation" => url,
+  ? "format" => auth-details-field-format,
+  "default" => any
+  ? "relative_date_limit" => int, ; why integer? Days? Negative possible?
+  ? "absolute_date_limit" => int, ; better to use duration no?
+  ? "limit" => int
+}

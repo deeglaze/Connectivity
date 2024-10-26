@@ -1,0 +1,13 @@
+registration-field = {
+  "id" => tstr,
+  "type" => registration-field-type,
+  "description" => tstr,
+  "documentation" => url,
+  ? "field_name" => tstr,
+  ? "format" => registration-field-format,
+  ? "default" => any,
+  ? "max_length" => int, ; why not uint?
+  ? "max_size => int, ; why not uint?
+  ? "amount" => decimal,
+  ? "currency" => currency_code
+}

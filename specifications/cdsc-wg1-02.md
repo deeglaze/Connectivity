@@ -124,6 +124,10 @@ In addition to requiring that the URL be included in the [CDSC-WG1-01 Metadata O
 
 A Server's Authorization Server Metadata Object follows OAuth's [Authorization Server Metadata](https://www.rfc-editor.org/rfc/rfc8414#section-2) object format with the following modifications from OPTIONAL or RECOMMENDED to REQUIRED:
 
+~~~ cddl
+{::include cddl/auth-server-metadata.cddl}
+~~~
+
 * `registration_endpoint` - _URL_ - (REQUIRED) OAuth's [Dynamic Client Registration](https://www.rfc-editor.org/rfc/rfc7591) functionality is required to enable the [Client Registration Process](#client-registration-process).
 * `scopes_supported` - _Array[string]_ - (REQUIRED) Disclosure of available scopes is required to enable integration capabilities into other platforms.
   This array MUST contain the `client_admin` scope.
@@ -143,11 +147,19 @@ In addition to the standard set of OAuth [Authorization Server Metadata](https:/
 
 In addition to the above additionally required set of OAuth [Authorization Server Metadata](https://www.rfc-editor.org/rfc/rfc8414#section-2) values, this specification clarifies use of the following OAuth standard values:
 
+~~~ cddl
+{::include cddl/auth-required-restrictions.cddl}
+~~~
+
 * `response_types_supported` - _Array[string]_ - (REQUIRED) The response types in this array MUST represent a union of all `response_types_supported` values contained in the `cds_scope_descriptions` object.
 * `grant_types_supported` - _Array[string]_ - (REQUIRED) The response types in this array MUST represent a union of all `grant_types_supported` values contained in the `cds_scope_descriptions` object.
 * `token_endpoint_auth_methods_supported` - _Array[string]_ - (REQUIRED) The response types in this array MUST represent a union of all `token_endpoint_auth_methods_supported` values contained in the `cds_scope_descriptions` object.
 
 In addition to OAuth capabilities included in the metadata object, this specification adds the following Carbon Data Specification (CDS) values:
+
+~~~ cddl
+{::include cddl/auth-required-extensions.cddl}
+~~~
 
 * `cds_oauth_version` - _string_ - (REQUIRED) The version of the CDS-WG1-02 Client Registration specification that the Server has implemented, which for this version of the specification is `v1`
 * `cds_human_registration` - _URL_ - (REQUIRED) Where Clients who do not have the technical capacity to use the `registration_endpoint` can visit to manually register a Client using a web browser
@@ -170,6 +182,10 @@ Other values not mentioned here but listed in specifications for the Authorizati
 ### 3.3. Scope Descriptions Object Format <a id="scope-descriptions-format" href="#scope-descriptions-format" class="permalink">🔗</a>
 
 Scope Description objects are formatted as JSON objects and contain named values. The following values are included in the default list available in scope description objects.
+
+~~~ cddl
+{::include cddl/cds-scope-descriptions.cddl}
+~~~
 
 * `id` - _string_ - (REQUIRED) The unique identifier of the scope. This MUST be the same value as the object key the Metadata Object's `cds_scope_descriptions` object.
 * `name` - _string_ - (REQUIRED) A human-readable name of the scope.
@@ -196,6 +212,10 @@ Scope Description objects are formatted as JSON objects and contain named values
 Registration Field objects are formatted as JSON objects and contain named values.
 The following values are included in the default list available in registration fields objects.
 
+~~~ cddl
+{::include cddl/registration-field.cddl}
+~~~
+
 * `id` - _string_ - (REQUIRED) The unique identifier of the registration field.
   This MUST be the same value as the object key the Metadata Object's `cds_registration_fields` object.
 * `type` - _[RegistrationFieldType](#registration-field-types)_ - (REQUIRED) What type of Registration Field this entry is.
@@ -217,6 +237,10 @@ Registration Fields can be either something that MUST or MAY be submitted as par
 
 The following list of strings are an enumerated set of registration field types that are valid `type` values in the registration field object.
 
+~~~ cddl
+{::include cddl/registration-field-type.cddl}
+~~~
+
 * `registration_field` - This field should be submitting with the [Client Registration Request](#registration-request) as the `field_name`.
   This type of registration field MUST also have `field_name` and `format` values.
   If this field is optional as part of registration, `default` must also be defined in the registration field object.
@@ -232,6 +256,10 @@ The following list of strings are an enumerated set of registration field types 
 Registration Field formats define the data type of submitted values for these fields in [Client Registration Requests](#registration-request).
 
 The following list of strings are an enumerated set of registration field formats that are valid `format` values in the registration field object.
+
+~~~ cddl
+{::include cddl/registration-field-format.cddl}
+~~~
 
 * `string` - If required, a string value MUST be submitted.
 * `string_or_null` - Same as `string`, only with `null` being an additional possible value.
@@ -250,6 +278,10 @@ The following list of strings are an enumerated set of registration field format
 
 Authorization Details Field objects are formatted as JSON objects and contain named values.
 The following values are included in the default list available in authorization details field objects.
+
+~~~ cddl
+{::include cddl/auth-details-field.cddl}
+~~~
 
 * `id` - _string_ - (REQUIRED) The unique identifier of the authorization details field.
   This value is used as the key for the field when added to `authorization_details` data fields as part of OAuth's [Rich Authorization Requests](https://www.rfc-editor.org/rfc/rfc9396).
@@ -270,6 +302,10 @@ The following values are included in the default list available in authorization
 Authorization Details Field formats define the data type of submitted values for these fields in `authorization_details` for OAuth's [Rich Authorization Requests](https://www.rfc-editor.org/rfc/rfc9396).
 
 The following list of strings are an enumerated set of authorization details field formats that are valid `format` values in the [Authorization Details Field objects](#auth-details-fields-format).
+
+~~~ cddl
+{::include cddl/auth-details-field-format.cddl}
+~~~
 
 * `relative_or_absolute_date` - A relative or absolute date string.
   Relative dates are formatted as a positive integer followed by a `y`, `m`, `w`, or `d` character, where the character represents the unit of duration (year, month, week, and day), and the integer represents the number of units for that duration.
@@ -296,12 +332,20 @@ This specification requires Clients and Servers follow the process described in 
 
 This specification requires Servers follow the process described in OAuth's [Client Registration Response](https://www.rfc-editor.org/rfc/rfc7591#section-3.2), with the following modifications to OAuth's [Client Information Response](https://www.rfc-editor.org/rfc/rfc7591#section-3.2.1) object.
 
+~~~ cddl
+TODO
+~~~
+
 * A `client_secret` value MUST be present in the response and be limited to `client_admin` scope use only.
 * The `scope` value MUST include the `client_admin` scope.
 * The `redirect_uris`, `grant_types`, and `response_types` values, if included, MUST be dynamically determined by the Server as a union of all of their respective values in the Client's [Scope Credentials](#scope-creds-format).
 * The `token_endpoint_auth_method` MUST always be set to `client_secret_basic`.
 
 Additionally, the following additional named values MUST be included in the response.
+
+~~~ cddl
+TODO
+~~~
 
 * `cds_server_metadata` - _URL_ - (REQUIRED) Where the Client can find their registration-specific version of the [CDSC-WG1-01 Server Metadata](/specs/cdsc-wg1-01/).
   If the Client's CDSC server metadata is no different from the public CDSC server metadata, Servers MAY simply link to the public URL.
@@ -331,6 +375,10 @@ These APIs are authenticated using a Bearer `access_token` granted to Clients us
 Client objects are formatted as JSON objects and contain named values.
 Client objects are required to follow the same object format as the [Client Registration Response](#registration-response), with the addition of the following named values.
 
+~~~ cddl
+TODO
+~~~
+
 * `cds_created` - _ISO8601 datetime_ - (REQUIRED) When the Client was created.
 * `cds_modified` - _ISO8601 datetime_ - (REQUIRED) When the Client was last modified.
 * `cds_client_uri` - _URL_ - (REQUIRED) Where to submit modifications using the Clients API [Modifying Clients](#clients-modify) functionality.
@@ -344,6 +392,10 @@ Clients MUST instead use the [Scope Credentials API](#scope-creds-api) to obtain
 
 Clients may request to list Client objects that they have access to by making an HTTPS `GET` request, authenticated with a valid Bearer `access_token` scoped to the `client_admin` scope, to the `cds_clients_api` URL included in the [Client Registration Response](#registration-response).
 The Client listing request responses are formatted as JSON objects and contain the following named values.
+
+~~~ cddl
+TODO
+~~~
 
 * `clients` - _Array[[Client](#client-format)]_ - (REQUIRED) A list of Clients to which the requesting `access_token` is scoped to have access.
   If no Clients are accessible, this value is an empty list (`[]`).
@@ -368,6 +420,10 @@ The URL to be used to send `PUT` requests for updating clients MUST be the `cds_
 If a Server has optionally implemented OAuth's [Dynamic Client Registration Management Protocol](https://www.rfc-editor.org/rfc/rfc7592), the value of `cds_client_uri` MUST be the same as `registration_client_uri`, and access tokens issued from either a `client_credentials` grant with the scope `client_admin` or the access token provided as the `registration_access_token` MUST be valid access tokens to interact with the client update endpoint.
 
 Servers MUST ignore updated values to the following fields and keep the Server-defined values set:
+
+~~~ cddl
+TODO
+~~~
 
 * `client_id` - This value is immutable from when it was assigned upon Client registration.
 * `client_id_issued_at` - This value is immutable from when the Client initially registered.
@@ -409,6 +465,10 @@ Clients request their current [Client Settings object](#client-settings-format) 
 
 Client Settings objects are formatted as JSON objects and contain the following named values:
 
+~~~ cddl
+TODO
+~~~
+
 * `default_scope` - _string_ - (REQUIRED) A space-separated list of scopes the Server will use for OAuth's [Authorization Requests](https://www.rfc-editor.org/rfc/rfc6749#section-4.1.1) if the Client does not supply a `scope` or `authorization_details` parameter in the request.
 * `profile_visibility` - _[ProfileVisibility](#profile-visibility)_ - (REQUIRED) This is visibility configuration of a Client in the [Directory API](#directory-api).
 * `profile_visibility_options` - _Array[[ProfileVisibility](#profile-visibility)]_ - (REQUIRED) This is the list of available Profile Visibility values that the Client may choose to set as their `profile_visibility`.
@@ -432,6 +492,10 @@ Client Settings objects are formatted as JSON objects and contain the following 
 
 Servers MUST make available the following Profile Visibility options in the `profile_visibility_options` list:
 
+~~~ cddl
+TODO
+~~~
+
 * `listed` - Servers MUST include the Client profile entry in both the [Directory API list](#directory-list) and [Publicly Accessible Web Directory](#public-directory).
   If Servers are asynchronously reviewing Clients before approving production access to scopes, Servers MUST NOT include this option in the list of `profile_visibility_options` until the Server has completed and approve the Client for production access to at least one of the non-`client_admin` scopes, and instead include `autolist` in the list of `profile_visibility_options`.
   For Client profile entries, Servers MUST NOT render the profile entry with `X-robots-tag` or `<meta name="robots" ...>` HTML head tags with a value of `noindex`, so that Client profile entries may be indexed by web search engines.
@@ -448,6 +512,10 @@ Servers MUST make available the following Profile Visibility options in the `pro
 Clients may have registered to a server for different purposes, so their Client profile entry button links may need to be styled as different actions based on the Client's use case.
 Servers MUST offer the following button styles for Clients to set as their `profile_button_style`:
 
+~~~ cddl
+TODO
+~~~
+
 * `authorize` - Rendered as a button indicating to the user that the button will allow the user to authorize the Client in some fashion, such as a button saying "Authorize {client_name}".
 * `link` - Rendered as a button indicating to the user that the button will allow the user to link or connect the user's account to the Client, such as a button saying "Link your account with {client_name}".
 * `goto` - Rendered as a button indicating to the user that the button will allow the user to go to the Client's website, such as a button saying "Visit the {client_name} website".
@@ -459,6 +527,10 @@ The fields included in JSON object are the fields the Client intends to update w
 If a field is not included in the `PATCH` request, the Server MUST leave the field unmodified from its current value.
 
 The following are fields that MAY be included in the `PATCH` request, and modification MUST be supported by Servers:
+
+~~~ cddl
+TODO
+~~~
 
 * `default_scope`
 * `profile_visibility`
@@ -490,6 +562,10 @@ The Client Updates API endpoints are authenticated using a Bearer `access_token`
 
 Client Update objects are formatted as JSON objects and contain the following named values:
 
+~~~ cddl
+TODO
+~~~
+
 * `uri` - _URL_ - (REQUIRED) Where to retrieve or modify this specific Client Update object.
 * `previous_uri` - _URL or `null`_ - (REQUIRED) Where to find the previous Client Update to which this Client Update has been created as a reply.
 * `type` - _[ClientUpdateType](#client-update-types)_ - (REQUIRED) The type of Client Update.
@@ -518,6 +594,10 @@ Client Update objects are formatted as JSON objects and contain the following na
 
 Client Update object `type` values MUST be one of the following:
 
+~~~ cddl
+TODO
+~~~
+
 * `notification` - The Server is sending the Client at notification message that is relevant to the Client.
   This message is considered to be not individually tailored to the Client specifically, but instead directed to all relevant Clients.
 * `private_message` - The Server or Client is sending a private message to the opposite party.
@@ -534,6 +614,10 @@ Client Update object `type` values MUST be one of the following:
 
 Client Update object `status` values MUST be one of the following:
 
+~~~ cddl
+TODO
+~~~
+
 * `complete` - For Client Updates with `type` values of `notification`, `private_message`, or `client_submission`, the `status` MUST be set as `complete`.
   For Client Updates with `type` values of `support_request`, `field_changes`, `server_request`, or `payment_request`, this represents the Server has completed and approved or resolved the Client's technical support request, field changes, submission, or payment.
 * `open` - For Client Updates with `type` values of `server_request` or `payment_request`, this represents that the Client has not yet submitted a response to the Server's submission or payment request.
@@ -545,6 +629,10 @@ Client Update object `status` values MUST be one of the following:
 ### 7.4. Client Update Request Object Format <a id="client-update-request-format" href="#client-update-request-format" class="permalink">🔗</a>
 
 Client Update Request objects are formatted as JSON objects and contain the following named values:
+
+~~~ cddl
+TODO
+~~~
 
 * `field` - _string_ - (REQUIRED) The field name of the field that is being requested to be updated.
   For Client Updates with `type` values of `field_changes`, this is the name of the object's field on the API.

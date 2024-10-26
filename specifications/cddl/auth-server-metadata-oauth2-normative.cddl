@@ -1,0 +1,27 @@
+auth-server-metadata-oauth2-normative = &(
+  "issuer" => url,
+  "authorization_endpoint" => url,
+  "token_endpoint" => url,
+  ? "jwks_uri" => url,
+  ; ? "registration_endpoint" => url,
+  ; ? "scopes_supported" => [ tstr ],
+  "response_types_supported" => [ tstr ],
+  ? "response_modes_supported" => [ tstr ],
+  ; ? "grant_types_supported" => [ tstr ],
+  ? "token_endpoint_auth_methods_supported" => oauth_token_endpoint_authentication_methods,
+  ? "token_endpoint_auth_signing_alg_values_supported" => [ alg ],
+  ; ? "service_documentation" => url,
+  ? "ui_locales_supported" => [ language-tag ],
+  ; ? "op_policy_uri" => url,
+  ; ? "op_tos_uri" => url,
+  ; ? "revocation_endpoint" => url,
+  ? "revocation_endpoint_auth_methods_supported" => [ oauth_token_endpoint_authentication_methods ],
+  ? "revocation_endpoint_auth_signing_alg_values_supported" => [ alg ],
+  ; ? "introspection_endpoint" => url,
+  ? "introspection_endpoint_auth_methods_supported" => [ oauth_token_endpoint_authentication_methods ],
+  ? "introspection_endpoint_auth_signing_alg_values_supported" => [ alg ],
+  ; ? "code_challenge_methods_supported" => [ pkce_code_challenge_method ]
+  * discovery-label ^=> discovery-value
+)
+discovery-label = tstr
+discovery-value = any

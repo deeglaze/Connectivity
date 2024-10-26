@@ -1,0 +1,6 @@
+registration-field-type = &(
+  "registration_field"
+  "manual_review"
+  "payment_required"
+  "email_verification"
+)

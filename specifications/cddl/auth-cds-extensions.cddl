@@ -1,0 +1,14 @@
+auth-cds-extensions = &(
+  "cds_oauth_version" => tstr,
+  "cds_human_registration"=> url,
+  "cds_human_directory"=> url,
+  "cds_test_accounts"=> url,
+  "cds_clients_api"=> url,
+  "cds_client_settings_api"=> url,
+  "cds_client_updates_api"=> url,
+  "cds_scope_credentials_api"=> url,
+  "cds_grants_api" => url, 
+  "cds_directory_api" => url,
+  "cds_scope_descriptions" => { * tstr => cds-scope-description },
+  "cds_registration_fields" => { * tstr => cds-registration-field }
+)

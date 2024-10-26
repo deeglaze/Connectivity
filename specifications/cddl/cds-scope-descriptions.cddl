@@ -1,0 +1,12 @@
+cds-scope-description = {
+  "id" => tstr,
+  "name" => tstr,
+  "description" => tstr,
+  "documentation" => url,
+  "registration_requirements" => [ tstr ],
+  "registration_optional" => [ tstr ],
+  "response_types_supported" => [ tstr ],
+  "grant_types_supported" => [ + tstr ],
+  "token_endpoint_auth_methods_supported" => [ tstr ],
+  "authorization_details_fields" => [ auth-details-field ]
+}

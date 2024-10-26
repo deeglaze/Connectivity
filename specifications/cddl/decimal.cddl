@@ -1,0 +1,2 @@
+; for arbitrary precision, a decimal must be a string.
+decimal = tstr

@@ -1,0 +1,3 @@
+; Note: not plain
+; https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#pkce-code-challenge-method
+pkce_code_challenge_method /= "S256"

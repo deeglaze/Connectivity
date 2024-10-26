@@ -1,0 +1,3 @@
+auth-details-field-format /= "relative_or_absolute_date"
+auth-details-field-format /= "int"
+auth-details-field-format /= "decimal"
